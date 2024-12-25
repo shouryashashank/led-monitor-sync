@@ -2,7 +2,7 @@
 This project demonstrates how to build a monitor sync ambient light system using an Arduino, WS2812B LED strip, and Prismatik software. The system synchronizes the colors of the LED strip with the colors displayed on your monitor, creating an immersive lighting experience.
 
 ## Media
-![image](https://github.com/user-attachments/assets/15a042a9-b362-4695-aea5-289d7082f8a4)
+<img src="https://github.com/user-attachments/assets/15a042a9-b362-4695-aea5-289d7082f8a4" height="350px" />
 
 [Video Demonstration](https://photos.app.goo.gl/R8GosLrnR3qGENdPA)
 
