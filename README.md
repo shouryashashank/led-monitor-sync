@@ -25,6 +25,9 @@ This project demonstrates how to build a monitor sync ambient light system using
 2. Provide power to the LED strip according to its specifications.
 3. Connect the Arduino to your computer using a USB cable.
 
+### Circuit Diagram
+<img src="https://github.com/user-attachments/assets/9facb26a-9961-4dea-af34-c3d224603f7f" height="350px" />
+
 ### Software Setup:
 1. Install the FastLED library in the Arduino IDE.
 2. Upload the `ADALIGHT_WS2812.ino` code to the Arduino.
