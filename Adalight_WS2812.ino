@@ -16,6 +16,10 @@
 // Adalight sends a "Magic Word" (defined in /etc/boblight.conf) before sending the pixel data
 uint8_t prefix[] = {'A', 'd', 'a'}, hi, lo, chk, i;
 
+// Configuration for the smooth breathing effect
+#define BREATH_STEP 3  // How quickly to increase/decrease brightness (lower = smoother/slower)
+#define BREATH_DELAY 8 // Milliseconds to pause between brightness changes
+
 // Initialise LED-array
 CRGB leds[NUM_LEDS];
 
@@ -23,14 +27,41 @@ void setup() {
   // Use NEOPIXEL to keep true colors
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   
-  // Initial RGB flash
-  LEDS.showColor(CRGB(255, 0, 0));
-  delay(500);
-  LEDS.showColor(CRGB(0, 255, 0));
-  delay(500);
-  LEDS.showColor(CRGB(0, 0, 255));
-  delay(500);
-  LEDS.showColor(CRGB(0, 0, 0));
+  // // Initial RGB flash
+  // LEDS.showColor(CRGB(255, 0, 0));
+  // delay(500);
+  // LEDS.showColor(CRGB(0, 255, 0));
+  // delay(500);
+  // LEDS.showColor(CRGB(0, 0, 255));
+  // delay(500);
+  // LEDS.showColor(CRGB(0, 0, 0));
+  // Initial smooth animation sequence: Rainbow "Loading" then White Breath
+  
+  // --- Phase 1: Rainbow Loading Effect (Mac Beach Ball Style) ---
+  // Cycle through a shifting rainbow pattern across the strip to simulate a loading indicator.
+  const int loadingSteps = 90; // Controls the length of the loading animation
+  for (int j = 0; j < loadingSteps; j++) {
+    // Fill the entire strip with a shifting rainbow pattern based on the loop counter
+    fill_rainbow(leds, NUM_LEDS, j * 3); 
+    FastLED.show();
+    delay(BREATH_DELAY);
+  }
+  
+  // Clear the strip before starting the white breath
+  LEDS.showColor(CRGB::Black); 
+  delay(200);
+
+  // --- Phase 2: White Breath ---
+  // Fade In (0 to 255)
+  for (int brightness = 0; brightness <= 255; brightness += BREATH_STEP) {
+    LEDS.showColor(CRGB(brightness, brightness, brightness)); // White
+    delay(BREATH_DELAY);
+  }
+  // Fade Out (255 to 0)
+  for (int brightness = 255; brightness >= 0; brightness -= BREATH_STEP) {
+    LEDS.showColor(CRGB(brightness, brightness, brightness)); // White
+    delay(BREATH_DELAY);
+  }
   
   Serial.begin(serialRate);
   // Send "Magic Word" string to host
