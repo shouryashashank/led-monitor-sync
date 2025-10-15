@@ -39,7 +39,7 @@ void setup() {
   
   // --- Phase 1: Rainbow Loading Effect (Mac Beach Ball Style) ---
   // Cycle through a shifting rainbow pattern across the strip to simulate a loading indicator.
-  const int loadingSteps = 90; // Controls the length of the loading animation
+  const int loadingSteps = 180; // Controls the length of the loading animation
   for (int j = 0; j < loadingSteps; j++) {
     // Fill the entire strip with a shifting rainbow pattern based on the loop counter
     fill_rainbow(leds, NUM_LEDS, j * 3); 
@@ -111,3 +111,4 @@ void loop() {
   // Shows new values
   FastLED.show();
 }
+
